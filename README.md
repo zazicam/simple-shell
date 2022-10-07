@@ -47,3 +47,5 @@ make test
 ```
 70 of 70 tests passed
 ```
+
+Посмотреть все изменения, которые потребовалось внести для решения задачи можно с помощью [сравнения стартового и конечного коммитов](https://github.com/zazicam/simple-shell/compare/c7f54f313ffb7dfb0d26d713af4aeb08ea34ed0f..6131b372d5090b42cf8a6a7460c1ff7f9d20f0c3)
