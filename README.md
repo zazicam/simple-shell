@@ -29,7 +29,6 @@ This lab is created by Eddie Kohler, with modifications by the CS5600 staff. Lab
 ```
 make
 ./cs5600sh
-
 ```
 
 ### Запуск тестов
