@@ -214,6 +214,10 @@ cmd_free(command_t *cmd)
 		return;
 
 	/* Your code here. */
+    cmd_free(cmd->next);
+    if(cmd->subshell)
+        cmd_free(cmd->subshell);
+    free(cmd);
 }
 
 
@@ -307,6 +311,14 @@ cmd_parse(parsestate_t *parsestate)
              //     have been given fit together. (It may be helpful to
              //     look over cmdparse.h again.)
             /* Your code here. */
+
+            if(i>0)
+                goto error;
+            cmd->subshell = cmd_line_parse(parsestate, 1);
+            if(!cmd->subshell)
+                goto error;
+            i++;
+
 			break;
 		default:
 			parse_ungettoken(parsestate);
@@ -384,12 +396,12 @@ cmd_line_parse(parsestate_t *parsestate, int in_parens)
 		case TOK_DOUBLEAMP:
 		case TOK_DOUBLEPIPE:
 		case TOK_PIPE:
-			cmd->controlop = token.type;
+			cmd->controlop = (int)token.type;
 			break;
 
 		case TOK_SEMICOLON:
 		case TOK_AMPERSAND:
-			cmd->controlop = token.type;
+			cmd->controlop = (int)token.type;
 			parse_gettoken(parsestate, &token);
 			if (token.type == TOK_END || token.type == TOK_CLOSE_PAREN)
 				goto ender;
